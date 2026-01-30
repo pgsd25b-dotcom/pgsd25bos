@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PGSD 1B.25 - Universitas Muhammadiyah Kuningan</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+:root{
+  --ungu:#6a1b9a;
+  --merah:#c62828;
+  --gelap:#1a1c20;
+  --bg:#f8f9fa;
+  --kuning: #fff9c4;
+}
+*{ box-sizing: border-box; }
+body{
+  margin:0;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background:var(--bg);
+  color: #333;
+  scroll-behavior: smooth;
+}
+
+/* HEADER & LOGO - DIPERBAIKI SUPAYA BULAT */
+header {
+  background: linear-gradient(135deg, var(--ungu), var(--merah));
+  color: white;
+  padding: 20px 15px;
+  text-align: center;
+}
+.brand-area img {
+  width: 80px; 
+  height: 80px;
+  border-radius: 50%; /* Membuat logo otomatis bulat */
+  object-fit: cover; /* Memastikan gambar tidak gepeng */
+  margin-bottom: 10px;
+  border: 3px solid rgba(255,255,255,0.3);
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+}
+.brand-area h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* NAVIGASI ATAS */
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin: 15px 0;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+nav a:hover { background: rgba(255,255,255,0.2); }
+
+/* TEKS BERJALAN */
+.marquee {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.8rem;
+}
+.marquee span {
+  display: inline-block;
+  white-space: nowrap;
+  animation: jalan 20s linear infinite;
+}
+@keyframes jalan {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+/* SECTION GLOBAL */
+section { padding: 50px 20px; max-width: 800px; margin: auto; }
+h2 { 
+  color: var(--ungu); 
+  border-left: 5px solid var(--merah); 
+  padding-left: 12px; 
+  margin-bottom: 25px; 
+  font-size: 1.5rem; 
+}
+
+/* CARD */
+.card { 
+  background: white; 
+  border-radius: 20px; 
+  padding: 20px; 
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+  margin-bottom: 25px; 
+}
+
+/* PENGUMUMAN BOX */
+.info-box {
+  background: #fff8e1;
+  border-left: 5px solid #ffc107;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+.info-box i {
+  color: #ffc107;
+  font-size: 1.5rem;
+  margin-top: 5px;
+}
+.info-content h4 {
+  margin: 0 0 5px 0;
+  color: #856404;
+}
+.info-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #856404;
+}
+
+/* PROFIL & PESAN KOSMA */
+.profile-box { text-align: center; }
+.profile-box img.foto-kosma { 
+  width: 110px; height: 110px; 
+  border-radius: 50%; 
+  border: 4px solid var(--ungu); 
+  object-fit: cover; 
+  margin-bottom: 15px;
+}
+.pesan-teks {
+  text-align: justify;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #444;
+  margin: 20px 0;
+}
+
+/* JUDUL TAMBAHAN DI PROFIL */
+.sub-judul-profil {
+  font-weight: bold;
+  color: var(--ungu);
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #eee;
+  display: inline-block;
+}
+
+/* LIST KEUNGGULAN */
+.list-keunggulan {
+  text-align: left;
+  display: inline-block;
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+}
+.list-keunggulan li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.list-keunggulan li i {
+  color: var(--merah);
+}
+
+/* STRUKTUR ORGANISASI */
+.struktur-wrapper { 
+  margin-top: 30px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 15px; 
+}
+.dpa-row { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 15px; 
+}
+.sekre-bend-row { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 10px; 
+}
+.struktur-item { 
+  background: #fff; 
+  padding: 12px; 
+  border-radius: 12px; 
+  border: 1px solid #eee;
+  border-bottom: 3px solid var(--ungu); 
+  font-size: 0.85rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  width: 100%;
+}
+.role { 
+  font-weight: bold; 
+  color: var(--merah); 
+  display: block; 
+  font-size: 0.7rem; 
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+/* JADWAL PERKULIAHAN */
+.table-container { overflow-x: auto; width: 100%; }
+table { width: 100%; border-collapse: collapse; min-width: 500px; }
+th { background: var(--ungu); color: white; padding: 12px; text-align: left; font-size: 0.9rem; }
+td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.85rem; }
+tr:nth-child(even) { background: #fcfaff; }
+
+/* ANGGOTA SLIDER DENGAN INISIAL */
+.member { text-align: center; cursor: pointer; transition: 0.3s; }
+.member:hover { transform: translateY(-5px); }
+.initial-circle {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.member p { font-size: 0.7rem; font-weight: 700; color: #555; margin: 0; line-height: 1.2; }
+
+/* ARTIKEL GESER (HORIZONTAL) */
+.artikel-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding-bottom: 15px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.artikel-wrapper::-webkit-scrollbar { height: 6px; }
+.artikel-wrapper::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px; }
+
+.artikel-item { 
+  flex: 0 0 280px; 
+  scroll-snap-align: start;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 15px;
+  border: 1px solid #eee;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.artikel-item:hover { background: #f9f9f9; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.artikel-item img { 
+  width: 100%; 
+  aspect-ratio: 16 / 9; 
+  border-radius: 10px; 
+  object-fit: cover; 
+  margin-bottom: 10px;
+}
+.artikel-item h4 { margin: 0 0 8px 0; color: var(--ungu); font-size: 0.95rem; line-height: 1.3; }
+.artikel-item p { 
+  font-size: 0.8rem; 
+  color: #666; 
+  margin: 0; 
+  display: -webkit-box;
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* CSS POPUP ARTIKEL FULL LAYAR */
+.popup-artikel { 
+  position: fixed; 
+  inset: 0; 
+  background: rgba(0,0,0,0.85); 
+  display: none; 
+  justify-content: center; 
+  align-items: center; 
+  z-index: 99999; 
+  padding: 15px;
+  backdrop-filter: blur(5px);
+}
+.popup-artikel-box { 
+  background: white; 
+  border-radius: 20px; 
+  width: 100%; 
+  max-width: 600px; 
+  max-height: 90vh;
+  overflow-y: auto; 
+  position: relative;
+  animation: zoomIn 0.3s ease;
+}
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.popup-artikel-box img { 
+  width: 100%; 
+  max-height: 350px; 
+  object-fit: cover; 
+}
+.popup-content-inner { padding: 25px; }
+.popup-content-inner h3 { margin-top: 0; color: var(--ungu); font-size: 1.4rem; line-height: 1.3; }
+.popup-content-inner p { text-align: justify; line-height: 1.6; color: #444; font-size: 0.95rem; white-space: pre-line; }
+
+/* Tombol Share */
+.share-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+.btn-share {
+  flex: 1; padding: 10px; border: none; border-radius: 8px; cursor: pointer;
+  font-weight: bold; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-wa { background: #25D366; color: white; }
+.btn-copy { background: #eee; color: #333; }
+.close-btn-art { 
+  margin-top: 20px; color: var(--merah); text-align: center;
+  font-weight: bold; cursor: pointer; border: 1px solid #eee; padding: 12px; border-radius: 10px;
+}
+
+/* GALERI - GRID STYLE */
+.galeri-container { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 12px; 
+}
+.galeri-item { 
+  background: white; 
+  border-radius: 12px; 
+  overflow: hidden; 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  border: 1px solid #eee;
+}
+.galeri-item img { 
+  width: 100%; 
+  aspect-ratio: 1 / 1; 
+  object-fit: cover; 
+  display: block; 
+}
+.galeri-caption { 
+  background: white; 
+  color: #333; 
+  padding: 12px 8px; 
+  font-size: 1rem; 
+  font-weight: 800; 
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* KONTAK */
+.contact-form input, .contact-form textarea {
+  width: 100%; padding: 12px; margin-bottom: 12px; 
+  border: 1px solid #ddd; border-radius: 10px; 
+  background: #fdfdfd; font-family: inherit;
+}
+.contact-form button {
+  background: linear-gradient(to right, var(--ungu), var(--merah));
+  color: white; border: none; padding: 15px; 
+  border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%;
+}
+
+/* FOOTER */
+footer {
+  background: var(--gelap);
+  color: #bdc3c7;
+  padding: 50px 20px 20px;
+}
+.footer-container { max-width: 800px; margin: auto; }
+.footer-section { margin-bottom: 35px; }
+.footer-section h3 { color: white; margin-bottom: 20px; font-size: 1.2rem; position: relative; }
+.footer-section h3::after { content:''; width: 40px; height: 3px; background: var(--merah); position: absolute; bottom: -8px; left: 0; }
+.footer-link { display: block; color: #bdc3c7; text-decoration: none; margin-bottom: 12px; font-size: 0.9rem; }
+.contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; font-size: 0.85rem; }
+.contact-item i { color: #3498db; font-size: 1.1rem; }
+
+.social-icons { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
+.social-icons a { 
+  width: 45px; height: 45px; color: white; 
+  display: flex; align-items: center; justify-content: center; 
+  border-radius: 50%; font-size: 1.3rem; text-decoration: none; transition: 0.3s;
+}
+.social-icons .fa-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.social-icons .fa-envelope { background: #c62828; }
+.social-icons .fa-tiktok { background: #000; }
+
+.copyright { 
+  text-align: center; font-size: 0.75rem; 
+  border-top: 1px solid #333; padding-top: 25px; margin-top: 20px; 
+}
+
+/* POPUP ANGGOTA */
+.popup { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+.popup-box { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 300px; text-align: center; position: relative; }
+.close-btn { margin-top: 20px; color: var(--merah); font-weight: bold; cursor: pointer; }
+
+/* MEDIA QUERIES */
+@media (max-width: 600px) {
+  header { padding: 30px 10px; }
+  .brand-area h1 { font-size: 1.1rem; }
+  nav { gap: 8px; }
+  nav a { font-size: 0.75rem; padding: 4px 8px; }
+  section { padding: 40px 15px; }
+  h2 { font-size: 1.3rem; }
+  .pesan-teks { font-size: 0.85rem; }
+  .sekre-bend-row { grid-template-columns: 1fr; } 
+  .initial-circle { width: 65px; height: 65px; font-size: 1.1rem; }
+  .artikel-item { flex: 0 0 250px; }
+  .galeri-container { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .galeri-caption { font-size: 0.9rem; }
+}
+</style>
+</head>
+<body id="top">
+
+<header>
+  <div class="brand-area">
+    <img src="lgo.jpg" alt="Logo">
+    <h1>KELAS PGSD 25B UMK</h1>
+  </div>
+  <nav>
+    <a href="#top">Beranda</a>
+    <a href="#profil">Profil</a>
+    <a href="#jadwal">Jadwal</a>
+    <a href="#info">Info</a>
+    <a href="#anggota">Anggota</a>
+    <a href="#artikel">Artikel</a>
+    <a href="#galeri">Galeri</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+  <div class="marquee">
+    <span>🎓 Selamat Datang Di Website Resmi Kelas PGSD 25B UMK | Cerdas Berkarakter Inspiratif | Email: pgsd25b@gmail.com | IG: @pgsd.25lb </span>
+  </div>
+</header>
+      
+<section id="profil">
+  <h2>Profil Kelas</h2>
+  <div class="card profile-box">
+    
+    <div class="sub-judul-profil">Profil Singkat PGSD25B</div>
+    <div class="pesan-teks">
+      <p>Kelas PGSD25B merupakan bagian dari Program Studi Pendidikan Guru Sekolah Dasar (PGSD) yang beranggotakan mahasiswa aktif dan berkomitmen dalam mengembangkan kompetensi sebagai calon pendidik profesional. Kelas ini menjunjung tinggi nilai kebersamaan, tanggung jawab, dan kerja sama dalam setiap kegiatan akademik maupun nonakademik.</p>
+    </div>
+
+    <div class="sub-judul-profil">Sejarah Singkat</div>
+    <div class="pesan-teks">
+      <p>Kelas PGSD25B terbentuk sebagai bagian dari penyelenggaraan pendidikan di Program Studi PGSD. Sejak awal, kelas ini menjadi wadah pengembangan potensi mahasiswa melalui kegiatan pembelajaran, diskusi, serta aktivitas penunjang akademik dan sosial.</p>
+    </div>
+
+    <div class="sub-judul-profil">Keunggulan</div>
+    <div style="text-align: center;">
+      <ul class="list-keunggulan">
+        <li><i class="fas fa-check-circle"></i> Kebersamaan dan Solidaritas</li>
+        <li><i class="fas fa-check-circle"></i> Aktif dan Inovatif</li>
+        <li><i class="fas fa-check-circle"></i> Disiplin dan Bertanggung Jawab</li>
+        <li><i class="fas fa-check-circle"></i> Peduli terhadap Pendidikan dan Sosial</li>
+      </ul>
+    </div>
+
+    <hr style="border: 0; border-top: 1px dashed #ccc; margin: 30px 0;">
+
+    <div class="sub-judul-profil">Sambutan Ketua</div>
+    
+    <div style="text-align: center; margin-bottom: 10px;">
+      <img src="kosma.jpg" class="foto-kosma" alt="Rijal Fauzi" style="display: block; margin: 0 auto 15px auto;">
+      <h3 style="margin:0; font-size: 1.3rem; color: #333;">Rijal Fauzi Nurwahid</h3>
+      <small style="color:var(--merah); font-weight:bold; text-transform: uppercase; letter-spacing: 1px;">Ketua Kelas (Kosma)</small>
+    </div>
+
+    <div class="pesan-teks">
+      <p>Assalamu’alaikum warahmatullahi wabarakatuh, Salam sejahtera untuk kita semua. Puji syukur kita panjatkan ke hadirat Allah SWT atas segala rahmat dan karunia-Nya, sehingga website resmi Kelas PGSD 1B ini dapat dibuat dan dikembangkan sebagai media informasi, komunikasi, serta dokumentasi kegiatan kelas kami.</p>
+      <p>Website ini hadir sebagai wadah untuk menampilkan berbagai aktivitas akademik maupun non-akademik mahasiswa PGSD 1B, mulai dari informasi perkuliahan, kegiatan kelas, dokumentasi, hingga karya dan kreativitas mahasiswa. Kami berharap website ini dapat menjadi sarana yang bermanfaat, tidak hanya bagi seluruh mahasiswa PGSD 1B, tetapi juga bagi dosen, civitas akademika, serta pihak lain yang ingin mengenal kelas kami lebih dekat.</p>
+      <p>Sebagai Ketua Kelas (Kosma), saya mengucapkan terima kasih kepada seluruh teman-teman PGSD 1B yang telah berkontribusi, baik dalam pembuatan website ini maupun dalam menjaga kekompakan dan semangat kebersamaan selama perkuliahan. Semoga melalui website ini, komunikasi antar mahasiswa semakin baik dan rasa solidaritas terus terjaga.</p>
+      <p>Akhir kata, kami terbuka terhadap saran dan masukan demi pengembangan website dan kemajuan kelas PGSD 1B ke depannya. Semoga website ini dapat menjadi sarana yang bermanfaat dan inspiratif bagi kita semua. Wassalamu’alaikum warahmatullahi wabarakatuh..</p>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+
+    <div class="sub-judul-profil">Struktur Organisasi</div>
+
+    <div class="struktur-wrapper">
+      <div class="dpa-row">
+        <div class="struktur-item" style="width: 100%; max-width: 300px; border-bottom: 3px solid var(--merah);">
+          <span class="role">Dosen Pembimbing Akademik</span>
+          <strong>Rita Kusumah, M.Pd</strong>
+        </div>
+        <div class="struktur-item" style="width: 100%; max-width: 300px; margin-top:10px;">
+          <span class="role">Ketua Kelas (Kosma)</span>
+          <strong>Rijal Fauzi Nurwahid</strong>
+        </div>
+      </div>
+      
+      <div class="sekre-bend-row">
+        <div class="struktur-item"><span class="role">Sekretaris 1</span><strong>Alya Prastika Zahra</strong></div>
+        <div class="struktur-item"><span class="role">Sekretaris 2</span><strong>Amalia Nisa Maratusoleha</strong></div>
+      </div>
+
+      <div class="sekre-bend-row">
+        <div class="struktur-item"><span class="role">Bendahara 1</span><strong>Ananda Febrianty Q.A</strong></div>
+        <div class="struktur-item"><span class="role">Bendahara 2</span><strong>Putri Agisna</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="jadwal">
+  <h2>Jadwal Perkuliahan</h2>
+  <div class="card table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Hari</th>
+          <th>Mata Kuliah</th>
+          <th>Jam</th>
+          <th>Ruang</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Senin</td><td>Pendidikan Dasar</td><td>08:00 - 10:00</td><td>A.12</td></tr>
+        <tr><td></td><td>pkn Dasar</td><td>08:00 - 10:00</td><td>A.12</td></tr>
+        <tr><td>Selasa</td><td>Psikologi Pendidikan</td><td>10:30 - 12:00</td><td>B.05</td></tr>
+        <tr><td>Rabu</td><td>Bahasa Indonesia</td><td>13:00 - 15:00</td><td>Lab</td></tr>
+        <tr><td>Kamis</td><td>Konsep Dasar PKN</td><td>08:00 - 10:00</td><td>C.02</td></tr>
+        <tr><td>Jumat</td><td>Matematika Dasar</td><td>09:00 - 11:00</td><td>B.01</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="info">
+  <h2>Pengumuman & Informasi</h2>
+  <div class="card">
+    <div class="info-box">
+      <i class="fas fa-bullhorn"></i>
+      <div class="info-content">
+        <h4>Informasi Perkuliahan Terkini</h4>
+        <p>Jangan lupa untuk mengecek kembali KRS semester Genap Kalian dan tetap menjaga koordinasi di grup WhatsApp kelas. Pastikan kehadiran minimal 75% untuk dapat mengikuti UAS.</p>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top: 15px; background: #e3f2fd; border-left-color: #2196f3;">
+      <i class="fas fa-calendar-alt" style="color: #2196f3;"></i>
+      <div class="info-content">
+        <h4 style="color: #0d47a1;">Agenda Mendatang</h4>
+        <p style="color: #0d47a1;">Literasi Alam (Agenda Rutinan).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="anggota">
+  <h2>Anggota Kelas</h2>
+  <div class="swiper s-anggota">
+    <div class="swiper-wrapper">
+      <script>
+        const anggota=["ANANDA FEBRIANTY QURROTUL 'AIN","AGISDA HAYATI","MILA NURLAELASARI","NAZMIA MUNAWAROH","TIKA NOPIANI","ZAHRA ZAKIATU MUNAWAROH","TIARA YUNITA SETIAWAN","AQILAWATUN NISA","RIJAL FAUZI NURWAHID","SATRIA ANGGA WIJAYA","KELSA","ZONA AZIZUL FIKRI","MAULANA AKBAR","KANNIA RIMANDA PUTRI","MUHAMAD RANGGA WIJAYA","TEGUH ADY PANGESTU","BELLA NATASYA DWI OKTAVIANI","CITRA DEWI","DHEVINA EKA PUTRY","KHARISMA ANGGUN APRILIA","SITI RESYA PADILAH","SOPI LAELA ZAHRA","SYAHLLA RAHMA NURJIHAN","DINDA NAYSYILA HASYIM","AMALIA NISA MARATUSOLEHA","ALYA PRASTIKA ZAHRA","SHELA TRI ANDIANI","putri Agisna","Juan Yudistira"];
+        
+        // Daftar warna untuk lingkaran inisial
+        const colors = ["#6a1b9a", "#c62828", "#1565c0", "#2e7d32", "#ef6c00", "#4527a0", "#ad1457"];
+
+        // Fungsi mendapatkan inisial (Contoh: Maulana Akbar -> MA)
+        function getInitials(name) {
+          let parts = name.split(' ');
+          let initials = '';
+          for (var i = 0; i < parts.length && i < 2; i++) {
+            if (parts[i].length > 0 && parts[i] !== '') {
+              initials += parts[i][0];
+            }
+          }
+          return initials.toUpperCase();
+        }
+
+        document.write(anggota.map((n, idx)=>`
+          <div class="swiper-slide">
+            <div class="member" onclick="showPopup('${n}', '${colors[idx % colors.length]}')">
+              <div class="initial-circle" style="background:${colors[idx % colors.length]}">${getInitials(n)}</div>
+              <p>${n}</p>
+            </div>
+          </div>`).join(""));
+      </script>
+    </div>
+  </div>
+</section>
+
+<section id="artikel">
+  <h2>Artikel & Berita</h2>
+  <div class="artikel-wrapper">
+    <div class="artikel-item" onclick="openArt(0)">
+      <img src="milad.jpeg" alt="Foto">
+      <h4>Semangat Tak Surut Meski Hujan, MABA PGSD UMK 2025 Sukses Raih Juara 2 Futsal Memperingati Milad Hima</h4>
+      <p>Mahasiswa baru Program Studi Pendidikan Guru Sekolah Dasar (PGSD) Universitas Muhammadiyah Kuningan (UMK) yang tergabung dari kelas PGSD A hingga PGSD D...</p>
+    </div>
+    
+    <div class="artikel-item" onclick="openArt(1)">
+      <img src="literasi.jpg" alt="Foto">
+      <h4>Perkuat Kebersamaan Dan Kepedulian Lingkungan, PGSD 25B Gelar Literasi Alam Di Cileuleuy</h4>
+      <p>Kelas PGSD 25B melaksanakan kegiatan Literasi Alam yang bertempat di rumah Rangga, Desa Cileuleuy, Kecamatan Cigugur, Kabupaten Kuningan...</p>
+    </div>
+
+    <div class="artikel-item" onclick="openArt(2)">
+      <img src="makrab.jpg" alt="Foto">
+      <h4>Makrab PGSD 2025 Tumbuh Dari Pengalaman Kuat Dengan Kebersamaan</h4>
+      <p>Kelas PGSD 25B melaksanakan kegiatan Makrab dengan berbagai kegiatan yang dilakukan secara serentak...</p>
+    </div>
+    
+    <div class="artikel-item" onclick="openArt(3)">
+      <img src="uas.jpg" alt="Foto">
+      <h4>Pelaksanaan Ujian Akhir Semester PGSD 1B Berlangsung Lancar Selama 3 Hari</h4>
+      <p>Kelas PGSD 25B melaksanakan ujian akhir semester dengan berbagai kegiatan yang dilakukan secara serentak...</p>
+    </div>
+    
+    <div class="artikel-item" onclick="openArt(4)">
+      <img src="gcoan.jpg" alt="Foto">
+      <h4>Penutupan UAS Penuh Kebersamaan, Mahasiswa PGSD 1B Perempuan Habiskan Waktu Bersama Di Gacoan</h4>
+      <p>Kelas PGSD 25B menutup semester dengan kegiatan bersama di Gacoan, menunjukkan semangat kebersamaan dan kebersamaan yang kuat di antara mahasiswa.</p>
+    </div>
+  </div>
+</section>
+
+<div class="popup-artikel" id="popupArtikel">
+  <div class="popup-artikel-box">
+    <img id="artFoto" src="" alt="Detail Berita">
+    <div class="popup-content-inner">
+      <h3 id="artJudul"></h3>
+      <p id="artIsi"></p>
+      
+      <div class="share-group">
+        <button class="btn-share btn-wa" onclick="shareWA()">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </button>
+        <button class="btn-share btn-copy" onclick="copyLink()">
+          <i class="fas fa-link"></i> Salin Link
+        </button>
+      </div>
+
+      <div class="close-btn-art" onclick="tutupArtikel()">Tutup Berita</div>
+    </div>
+  </div>
+</div>
+
+<section id="galeri">
+  <h2>Galeri Kegiatan</h2>
+  <div class="galeri-container">
+    <div class="galeri-item">
+      <img src="pembuka.jpg" alt="Galeri 1">
+      <div class="galeri-caption">Hari pertama kuliah</div>
+    </div>
+    <div class="galeri-item">
+      <img src="alm.jpg" alt="Galeri 2">
+      <div class="galeri-caption">foto bersama istri Alm. bupati kuningan</div>
+    </div>
+    <div class="galeri-item">
+      <img src="literasi.jpg" alt="Galeri 3">
+      <div class="galeri-caption">Kegiatan Literasi Alam</div>
+    </div>
+    <div class="galeri-item">
+      <img src="uts.jpg" alt="Galeri 3">
+      <div class="galeri-caption">Ujian Tengah Semester</div>
+    </div>
+    <div class="galeri-item">
+      <img src="cool.jpg" alt="Galeri 4">
+      <div class="galeri-caption">Only Man PGSD B</div>
+    </div>
+    <div class="galeri-item">
+      <img src="fresh.jpg" alt="Galeri 4">
+      <div class="galeri-caption">Only Woman PGSD B</div>
+    </div>
+    <div class="galeri-item">
+      <img src="makrab.jpg" alt="Galeri 4">
+      <div class="galeri-caption">Makrab PGSD</div>
+    </div>
+    <div class="galeri-item">
+      <img src="uas.jpg" alt="Galeri 4">
+      <div class="galeri-caption">Ujian Akhir Semester</div>
+    </div>
+    <div class="galeri-item">
+      <img src="penutup.jpg" alt="Galeri 4">
+      <div class="galeri-caption">Pertemuan Terakhir Di Semester 1</div>
+    </div>
+    <div class="galeri-item">
+      <img src="gcoan.jpg" alt="Galeri 4">
+      <div class="galeri-caption">Kebersamaan Di Gacoan</div>
+    </div>
+  </div>
+</section>
+
+<section id="kontak">
+  <h2>Hubungi Kami</h2>
+  <div class="card contact-form">
+    <form action="https://formspree.io/f/pgsd25b@gmail.com" method="POST">
+      <input type="text" name="Nama" placeholder="Nama Lengkap" required>
+      <input type="email" name="Email" placeholder="Email Anda" required>
+      <textarea name="Pesan" rows="4" placeholder="Tulis pesan Anda untuk kelas kami..." required></textarea>
+      <button type="submit">Kirim Sekarang</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>PGSD 1B.25</h3>
+      <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Universitas Muhammadiyah Kuningan</div>
+      <div class="contact-item"><i class="fab fa-instagram"></i> @pgsd.25lb</div>
+      <div class="contact-item"><i class="fas fa-envelope"></i> pgsd25b@gmail.com</div>
+      <div class="contact-item"><i class="fab fa-tiktok"></i> pgsd1b.25</div>
+    </div>
+
+    <div class="footer-section">
+      <h3>Tautan Cepat</h3>
+      <a href="#profil" class="footer-link">Profil Kelas</a>
+      <a href="#jadwal" class="footer-link">Jadwal Kuliah</a>
+      <a href="#anggota" class="footer-link">Anggota</a>
+      <a href="#galeri" class="footer-link">Galeri</a>
+      <a href="#kontak" class="footer-link">Kontak Kami</a>
+    </div>
+
+    <div class="social-icons">
+      <a href="https://instagram.com/pgsd.25lb" target="_blank" class="fab fa-instagram" title="Instagram"></a>
+      <a href="mailto:pgsd25b@gmail.com" class="fas fa-envelope" title="Email Kami"></a>
+      <a href="https://tiktok.com/@pgsd1b.25" target="_blank" class="fab fa-tiktok" title="TikTok"></a>
+    </div>
+
+    <div class="copyright">
+      <p>© 2025 PGSD 1B.25. All rights reserved.</p>
+      <p>Design & Developed by : Media PGSD25B</p>
+    </div>
+  </div>
+</footer>
+
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <div id="popupInitial" class="initial-circle" style="width:90px; height:90px; font-size:2rem; margin-bottom:15px;"></div>
+    <h3 id="popupName" style="margin:5px 0 5px 0; font-size:1.1rem;"></h3>
+    <p style="color:var(--merah); font-weight:bold; font-size:0.8rem;">Mahasiswa PGSD 1B</p>
+    <div class="close-btn" onclick="closePopup()">Tutup</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// DATA ARTIKEL (Simpan teks panjang di sini agar aman dan rapi)
+const dataArtikel = [
+  {
+    img: "milad.jpeg",
+    title: "Semangat Tak Surut Meski Hujan, MABA PGSD UMK 2025 Sukses Raih Juara 2 Futsal Memperingati Milad Hima",
+    content: `Mahasiswa baru Program Studi Pendidikan Guru Sekolah Dasar (PGSD) Universitas Muhammadiyah Kuningan (UMK) yang tergabung dari kelas PGSD A hingga PGSD D turut berpartisipasi dalam kegiatan lomba futsal dalam rangka Milad HIMA PGSD, yang dilaksanakan pada Kamis, 23 Oktober 2025.
+
+Kegiatan ini menjadi ajang silaturahmi sekaligus wadah untuk menumbuhkan semangat sportivitas, kekompakan, dan solidaritas antar mahasiswa PGSD. Tim futsal gabungan mahasiswa baru PGSD tampil penuh semangat sejak pertandingan awal hingga babak final.
+
+Meskipun harus bertanding dalam kondisi cuaca yang kurang mendukung, khususnya saat semi final dan final yang diguyur hujan, semangat para pemain tidak surut. Dengan kerja sama tim yang solid, strategi permainan yang matang, serta dukungan dari rekan-rekan mahasiswa, tim PGSD berhasil melaju hingga partai puncak.
+
+Alhamdulillah, perjuangan tersebut membuahkan hasil membanggakan. Tim futsal mahasiswa baru PGSD UMK berhasil meraih Juara 2 dalam turnamen futsal Milad HIMA PGSD 2025. Prestasi ini menjadi bukti bahwa mahasiswa PGSD tidak hanya unggul dalam bidang akademik, tetapi juga aktif dan berprestasi di bidang non-akademik.
+
+Melalui kegiatan ini, diharapkan semangat kebersamaan, sportivitas, dan kekeluargaan antar mahasiswa PGSD semakin erat serta menjadi motivasi untuk terus berprestasi di berbagai bidang ke depannya.`
+  },
+
+  {
+    img: "literasi.jpg",
+    title: "Perkuat Kebersamaan Dan Kepedulian Lingkungan, PGSD 25B Gelar Literasi Alam Di Cileuleuy",
+    content: `Kelas PGSD 25B melaksanakan kegiatan Literasi Alam yang bertempat di rumah Rangga, Desa Cileuleuy, Kecamatan Cigugur, Kabupaten Kuningan. Kegiatan ini berlangsung dengan penuh kebersamaan, keceriaan, serta diwarnai dengan banyak canda tawa antar mahasiswa.
+
+Kegiatan diawali dengan ngeliwet dan makan bersama, yang menjadi momen paling berkesan. Suasana hangat dan akrab terasa sejak awal kegiatan, di mana seluruh mahasiswa berkumpul, bercanda, dan menikmati kebersamaan dalam suasana alam yang sejuk dan asri.
+
+Setelah itu, kegiatan dilanjutkan dengan pengarahan dari Bapak Oman Suryaman, M.Pd. Beliau memberikan motivasi serta arahan mengenai pentingnya literasi alam sebagai bagian dari proses pembelajaran, khususnya bagi mahasiswa PGSD sebagai calon pendidik.`
+  },
+
+  {
+    img: "makrab.jpg",
+    title: "Makrab PGSD 2025 Tumbuh Dari Pengalaman Kuat Dengan Kebersamaan",
+    content: `Program Studi Pendidikan Guru Sekolah Dasar (PGSD) melaksanakan kegiatan Malam Keakraban (Makrab) sebagai ajang untuk mempererat tali silaturahmi serta menumbuhkan rasa kekeluargaan antar mahasiswa. Kegiatan ini diikuti oleh mahasiswa PGSD dengan penuh antusias dan semangat kebersamaan.
+
+Rangkaian kegiatan Makrab diawali dengan pemberian materi yang bertujuan untuk memberikan motivasi, wawasan, serta penguatan nilai kebersamaan dan tanggung jawab sebagai mahasiswa PGSD. Suasana semakin meriah dengan adanya pentas seni (pensi) dari setiap kelompok yang menampilkan berbagai kreativitas, hiburan, dan penampilan menarik yang mengundang tawa serta keceriaan.
+
+Memasuki malam hari, peserta mengikuti kegiatan jelajah malam yang berlangsung dengan penuh ketegangan dan tantangan. Kegiatan ini melatih keberanian, kekompakan, serta kerja sama antar anggota kelompok. Meski diliputi suasana tegang, kegiatan ini justru menjadi salah satu momen paling berkesan bagi seluruh peserta.
+
+Keesokan harinya, kegiatan dilanjutkan dengan berbagai permainan (games) dan sesi have fun yang semakin mempererat keakraban antar mahasiswa. Setelah itu, peserta mengikuti jelajah siang yang menguji kekompakan, ketahanan fisik, serta kerja sama tim.
+
+Salah satu momen yang paling bermakna dalam rangkaian kegiatan ini adalah temu demisioner, di mana para peserta mendapatkan banyak motivasi, cerita inspiratif, serta pesan-pesan berharga dari para senior. Momen ini menjadi sarana pembelajaran sekaligus penyemangat bagi mahasiswa untuk terus berkembang selama menjalani perkuliahan.
+
+Sebagai penutup kegiatan malam, seluruh peserta berkumpul dalam suasana hangat pada malam api unggun. Kebersamaan, tawa, dan keakraban terasa semakin erat, menciptakan kenangan yang sulit dilupakan.
+
+Pada pagi harinya, kegiatan ditutup dengan penutupan yang penuh haru. Suasana reflektif terasa ketika seluruh peserta berkumpul, saling berbagi kesan dan pesan, serta mengungkapkan rasa syukur atas kebersamaan yang telah terjalin. Banyak peserta yang terharu, bahkan meneteskan air mata, karena merasa telah menjadi bagian dari keluarga besar PGSD. 
+Momen ini menjadi simbol kuatnya rasa persaudaraan dan kebersamaan yang telah terbentuk selama kegiatan Makrab berlangsung.
+
+Melalui kegiatan Makrab ini, diharapkan mahasiswa PGSD semakin solid, kompak, dan memiliki rasa kekeluargaan yang kuat, serta siap menjalani kehidupan perkuliahan dengan semangat kebersamaan, tanggung jawab, dan kebersamaan yang tinggi.`
+   },
+
+   {
+    img: "uas.jpg",
+    title: "Pelaksanaan Ujian Akhir Semester PGSD 1B Berlangsung Lancar Selama 3 Hari",
+    content: `Mahasiswa Program Studi Pendidikan Guru Sekolah Dasar (PGSD) kelas 1B telah melaksanakan Ujian Akhir Semester (UAS) selama tiga hari berturut-turut. Kegiatan ini merupakan bagian dari rangkaian evaluasi akademik untuk mengukur pemahaman mahasiswa terhadap materi yang telah dipelajari selama satu semester.
+
+Pelaksanaan UAS berlangsung dengan tertib dan lancar. Seluruh mahasiswa PGSD 1B mengikuti ujian dengan penuh kesungguhan, tanggung jawab, serta mematuhi aturan yang telah ditetapkan. Setiap mata kuliah diuji sesuai jadwal yang telah ditentukan oleh pihak program studi.
+
+Tidak hanya kelas PGSD 1B, kelas-kelas lain di lingkungan PGSD juga turut melaksanakan UAS pada waktu yang bersamaan. Hal ini menciptakan suasana kampus yang lebih aktif dan kondusif, dengan seluruh mahasiswa fokus menyelesaikan rangkaian ujian akhir semester.
+
+Selama pelaksanaan UAS, mahasiswa dituntut untuk menunjukkan kemampuan akademik, kedisiplinan, serta kejujuran dalam mengerjakan setiap soal. Meskipun jadwal cukup padat, mahasiswa tetap menjalaninya dengan semangat dan tanggung jawab.
+
+Dengan berakhirnya pelaksanaan UAS ini, diharapkan seluruh mahasiswa PGSD, khususnya kelas 1B, dapat memperoleh hasil yang maksimal serta menjadikan pengalaman ini sebagai bahan evaluasi untuk meningkatkan kualitas belajar di semester selanjutnya.`
+   },
+   
+   {
+    img: "gcoan.jpg",
+    title: "Penutupan UAS Penuh Kebersamaan, Mahasiswa PGSD 1B Perempuan Habiskan Waktu Bersama Di Gacoan",
+    content: `Setelah melewati rangkaian Ujian Akhir Semester (UAS), mahasiswa PGSD 25B, akhirnya menuntaskan salah satu mata kuliah terakhir, yaitu Konsep Dasar Matematika (Kondas MTK). Ujian ini menjadi penutup dari rangkaian evaluasi akademik yang telah dijalani selama satu semester penuh.
+
+Usai menyelesaikan UAS, suasana yang sebelumnya tegang berubah menjadi lebih santai dan penuh kelegaan. Sebagai bentuk kebersamaan dan kenang-kenangan, seluruh mahasiswa melakukan foto bersama. Momen ini menjadi simbol kekompakan serta kebersamaan setelah melewati proses perkuliahan dan ujian yang cukup menguras tenaga dan pikiran.
+
+Setelah sesi dokumentasi, kegiatan dilanjutkan dengan waktu santai bersama di Gacoan yang diikuti oleh mahasiswa PGSD 1B perempuan. Kegiatan ini menjadi momen untuk melepas penat, berbincang ringan, serta mempererat keakraban antar sesama mahasiswa. Suasana hangat, penuh canda, dan kebersamaan terasa begitu kental selama kegiatan berlangsung.
+
+Momen sederhana ini menjadi bukti bahwa kebersamaan mahasiswa PGSD 1B tidak hanya terjalin di dalam kelas, tetapi juga melalui kegiatan santai di luar perkuliahan. Diharapkan, kebersamaan ini dapat terus terjaga dan menjadi semangat baru dalam menjalani perkuliahan di semester berikutnya.`
+   },
+];
+
+// FUNGSI UNTUK MEMBUKA ARTIKEL BERDASARKAN INDEX
+function openArt(index) {
+  const art = dataArtikel[index];
+  const popup = document.getElementById('popupArtikel');
+  document.getElementById('artFoto').src = art.img;
+  document.getElementById('artJudul').innerText = art.title;
+  document.getElementById('artIsi').innerText = art.content;
+  popup.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+new Swiper('.s-anggota',{ 
+  slidesPerView: 2.5, 
+  spaceBetween: 15, 
+  autoplay: { delay: 2000,disableOnInteraction:false},
+  breakpoints: {
+    640: { slidesPerView: 4.5 },
+    1024: { slidesPerView: 5.5 }
+  }
+});
+
+// Penyesuaian showPopup untuk inisial
+function showPopup(n, color){ 
+  const popupInitial = document.getElementById('popupInitial');
+  document.getElementById('popupName').innerText=n; 
+  popupInitial.innerText = getInitials(n);
+  popupInitial.style.background = color;
+  document.getElementById('popup').style.display="flex"; 
+}
+function closePopup(){ 
+  document.getElementById('popup').style.display="none"; 
+}
+
+function tutupArtikel(){
+  document.getElementById('popupArtikel').style.display = "none";
+  document.body.style.overflow = "auto"; 
+}
+
+function shareWA() {
+  const judul = document.getElementById('artJudul').innerText;
+  const link = window.location.href;
+  const teks = encodeURIComponent(`Baca berita terbaru dari PGSD 1B.25: *${judul}* \n\nCek selengkapnya di: `);
+  window.open(`https://wa.me/?text=${teks}${link}`, '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert("Link website berhasil disalin!");
+  });
+}
+
+window.onclick = function(event) {
+  const popAnggota = document.getElementById('popup');
+  const popArtikel = document.getElementById('popupArtikel');
+  if (event.target == popAnggota) closePopup();
+  if (event.target == popArtikel) tutupArtikel();
+}
+</script>
+
+</body>
+</html>
