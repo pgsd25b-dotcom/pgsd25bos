@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Super Admin - PGSD 25B</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #4a148c; --secondary: #c62828; --bg: #f8f9fa; --accent: #ffc107; --success: #1b5e20; --white: #ffffff; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); margin: 0; color: #333; line-height: 1.6; }
+        
+        /* ANIMASI LOGO PULSE */
+        @keyframes pulse-animation {
+            0% { transform: scale(1); box-shadow: 0 0 0 0px rgba(74, 20, 140, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(74, 20, 140, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0px rgba(74, 20, 140, 0); }
+        }
+        .logo-pulse { animation: pulse-animation 2s infinite; border-radius: 50%; }
+
+        /* TEKS BERJALAN STYLE */
+        .marquee-container {
+            background: #f0f0f0;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+            overflow: hidden;
+        }
+
+        /* LOGIN SCREEN */
+        #login-screen { position: fixed; inset: 0; background: linear-gradient(45deg, #4a148c, #7b1fa2); z-index: 1000; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .login-card { background: white; padding: 40px 30px; border-radius: 24px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .login-card .logo-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .login-card img { width: 75px; height: 75px; object-fit: cover; border: 2px solid var(--primary); padding: 2px; border-radius: 50%; }
+        
+        /* NAVBAR PRO */
+        .navbar { background: var(--white); flex-direction: column; display: flex; box-shadow: 0 2px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; border-bottom: 4px solid var(--primary); }
+        .nav-content { width: 100%; max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; position: relative; }
+        .nav-center { display: flex; align-items: center; gap: 12px; margin: auto; }
+        .nav-center img { height: 40px; width: 40px; object-fit: cover; border-radius: 50%; border: 1px solid #ddd; }
+        .nav-center strong { font-size: 0.9rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* DASHBOARD CONTENT */
+        .container { padding: 20px; max-width: 750px; margin: auto; }
+        .card { background: var(--white); padding: 25px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 25px; border-left: 6px solid var(--primary); transition: 0.3s; }
+        
+        h3 { font-size: 1.1rem; color: var(--primary); margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        label { font-size: 0.8rem; font-weight: 700; color: #666; display: block; margin-bottom: 5px; margin-top: 15px; text-transform: uppercase; }
+
+        input, textarea { width: 100%; padding: 14px; margin-bottom: 5px; border: 1.5px solid #e0e0e0; border-radius: 12px; box-sizing: border-box; font-size: 15px; transition: 0.2s; background: #fafafa; }
+        input:focus, textarea:focus { border-color: var(--primary); outline: none; background: #fff; box-shadow: 0 0 0 4px rgba(74, 20, 140, 0.05); }
+        
+        .btn { border: none; padding: 15px; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; width: 100%; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 10px; text-transform: uppercase; margin-top: 10px; }
+        .btn-post { background: var(--primary); color: white; }
+        .btn-post:hover { background: #310d5e; transform: translateY(-1px); }
+        
+        /* LIST STYLING */
+        .list-container { margin-top: 20px; background: #fdfdfd; border-radius: 12px; border: 1px solid #eee; overflow: hidden; }
+        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; border-bottom: 1px solid #eee; background: white; }
+        .list-item:last-child { border-bottom: none; }
+        .list-item span { font-size: 0.85rem; font-weight: 600; color: #444; }
+        .btn-delete { background: #fff1f0; color: var(--secondary); border: 1px solid #ffa39e; padding: 6px 12px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.7rem; }
+        
+        .hidden { display: none !important; }
+
+        /* Mobile View Fix */
+        @media (max-width: 480px) {
+            .nav-center strong { display: none; }
+            .nav-center { gap: 15px; }
+            .container { padding: 15px; }
+            .card { padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-card">
+            <div class="logo-group">
+                <img src="lgo.jpg" class="logo-pulse" alt="Logo 1">
+                <img src="https://i.ibb.co.com/6RGmKqK1/Chat-GPT-Image-Feb-2-2026-04-23-23-PM.png" class="logo-pulse" alt="Logo 2">
+            </div>
+            <h2 style="margin:0; color:var(--primary);">PGSD ADMIN</h2>
+            <p style="color: #888; margin-top: 5px; margin-bottom: 15px; font-size: 0.9rem;">Kelola Konten Beranda 25B</p>
+            
+            <marquee class="marquee-container" style="border-radius:10px; margin-bottom:15px;">Panel PGSD 25B · Informasi Kelas · Data Mahasiswa · Jadwal Kuliah · Arsip Kegiatan · Dokumentasi · Sistem Digital PGSD 25B</marquee>
+
+            <input type="email" id="email" placeholder="Email Admin">
+            <input type="password" id="pass" placeholder="Password">
+            <button class="btn btn-post" onclick="login()"><i class="fas fa-sign-in-alt"></i> Masuk Sekarang</button>
+        </div>
+    </div>
+
+    <div id="dashboard" class="hidden">
+        <div class="navbar">
+            <div class="nav-content">
+                <div style="width: 40px;"></div>
+                <div class="nav-center">
+                    <img src="lgo.jpg" class="logo-pulse" alt="Logo 1">
+                    <strong>Admin PGSD 25B</strong>
+                    <img src="https://i.ibb.co.com/6RGmKqK1/Chat-GPT-Image-Feb-2-2026-04-23-23-PM.png" class="logo-pulse" alt="Logo 2">
+                </div>
+                <button onclick="logout()" style="border:none; background:none; color:var(--secondary); font-size:1.2rem; cursor:pointer;"><i class="fas fa-power-off"></i></button>
+            </div>
+            <marquee class="marquee-container">Panel PGSD 25B · Informasi Kelas · Data Mahasiswa · Jadwal Kuliah · Arsip Kegiatan · Dokumentasi · Sistem Digital PGSD 25B</marquee>
+        </div>
+
+        <div class="container">
+            
+            <div class="card" style="border-left-color: var(--accent);">
+                <h3><i class="fas fa-bullhorn" style="color:var(--accent)"></i> Info & Agenda</h3>
+                <label>Informasi Perkuliahan (Kuning)</label>
+                <textarea id="setInfo" rows="2" placeholder="Tulis pengumuman..."></textarea>
+                <label>Agenda Mendatang (Biru)</label>
+                <input type="text" id="setAgenda" placeholder="Contoh: Literasi Alam">
+                <button class="btn btn-post" style="background:var(--accent); color: #333;" onclick="updateInfo()">Perbarui Informasi</button>
+            </div>
+
+            <div class="card" style="border-left-color: var(--success);">
+                <h3><i class="fas fa-id-card" style="color:var(--success)"></i> Sambutan Ketua</h3>
+                <label>Nama Ketua Kelas</label>
+                <input type="text" id="setNama" placeholder="Nama Lengkap">
+                <label>Isi Sambutan</label>
+                <textarea id="setTeks" rows="4" placeholder="Tulis kata sambutan..."></textarea>
+                <button class="btn btn-post" style="background:var(--success)" onclick="updateSambutan()">Simpan Sambutan</button>
+            </div>
+
+            <div class="card" style="border-left-color: #1565c0;">
+                <h3><i class="fas fa-calendar-alt" style="color:#1565c0"></i> Jadwal Perkuliahan</h3>
+                <label>Hari</label>
+                <input type="text" id="hrJadwal" placeholder="Senin / Selasa / ...">
+                <label>Mata Kuliah</label>
+                <input type="text" id="mkJadwal" placeholder="Nama Mata Kuliah">
+                <label>Jam Kuliah</label>
+                <input type="text" id="jamJadwal" placeholder="Contoh: 08:00 - 10:00">
+                <label>Ruangan</label>
+                <input type="text" id="ruangJadwal" placeholder="Contoh: R.A 201">
+                <button class="btn btn-post" style="background:#1565c0" onclick="saveJadwal()">Simpan Jadwal</button>
+                <div class="list-container" id="list-jadwal"></div>
+            </div>
+
+            <div class="card" style="border-left-color: #ef6c00;">
+                <h3><i class="fas fa-newspaper" style="color:#ef6c00"></i> Posting Berita</h3>
+                <label>Judul</label>
+                <input type="text" id="jdlArt" placeholder="Judul Berita">
+                <label>Link Foto / Nama File</label>
+                <input type="text" id="imgArt" placeholder="https://i.ibb.co/.... atau foto.png">
+                <label>Isi Berita</label>
+                <textarea id="isiArt" rows="4" placeholder="Tulis isi berita..."></textarea>
+                <button class="btn btn-post" style="background:#ef6c00" onclick="saveData('artikel', {title:jdlArt.value, img:imgArt.value || 'info.jpg', content:isiArt.value})">Posting Sekarang</button>
+                <div class="list-container" id="list-artikel"></div>
+            </div>
+
+            <div class="card" style="border-left-color: #607d8b;">
+                <h3><i class="fas fa-images" style="color:#607d8b"></i> Galeri Foto</h3>
+                <label>Keterangan</label>
+                <input type="text" id="ketGal" placeholder="Judul foto">
+                <label>Link Foto / Nama File</label>
+                <input type="text" id="imgGal" placeholder="https://i.ibb.co/.... atau foto.png">
+                <button class="btn btn-post" style="background:#607d8b" onclick="saveData('galeri', {caption:ketGal.value, img:imgGal.value})">Tambah Galeri</button>
+                <div class="list-container" id="list-galeri"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmvSb1d7vysxaiO1BiuIMMudPbxYNgEm4",
+            authDomain: "web-pgsd-25b.firebaseapp.com",
+            projectId: "web-pgsd-25b",
+            storageBucket: "web-pgsd-25b.firebasestorage.app",
+            messagingSenderId: "968783885316",
+            appId: "1:968783885316:web:ae83ae59471be166c7b151"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // PAKSA LOGIN ULANG (PERSISTENCE SESSION)
+        function login() {
+            const e = document.getElementById('email').value;
+            const p = document.getElementById('pass').value;
+            
+            auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+                .then(() => {
+                    return auth.signInWithEmailAndPassword(e, p);
+                })
+                .catch(err => alert("Login Gagal! Periksa Email/Password."));
+        }
+
+        auth.onAuthStateChanged(user => {
+            if(user && user.email === "adminpgsd25b@gmail.com") {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                loadList('artikel', 'list-artikel', 'title');
+                loadList('galeri', 'list-galeri', 'caption');
+                loadList('jadwal', 'list-jadwal', 'matkul');
+            } else {
+                document.getElementById('login-screen').classList.remove('hidden');
+                document.getElementById('dashboard').classList.add('hidden');
+            }
+        });
+
+        // FUNGSI KHUSUS JADWAL (DENGAN RUANGAN)
+        async function saveJadwal() {
+            const h = document.getElementById('hrJadwal').value;
+            const m = document.getElementById('mkJadwal').value;
+            const j = document.getElementById('jamJadwal').value;
+            const r = document.getElementById('ruangJadwal').value;
+            
+            if(!h || !m) return alert("Hari dan Mata Kuliah wajib diisi!");
+            
+            await db.collection('jadwal').add({
+                hari: h,
+                matkul: m,
+                info: j + " | " + r, // Menggabungkan Jam dan Ruangan
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            alert("Jadwal Berhasil Disimpan!");
+            location.reload();
+        }
+
+        async function updateInfo() {
+            const i = document.getElementById('setInfo').value;
+            const a = document.getElementById('setAgenda').value;
+            await db.collection("settings").doc("pengumuman").set({ info: i, agenda: a });
+            alert("Info Berhasil Diperbarui!");
+        }
+
+        async function updateSambutan() {
+            const n = document.getElementById('setNama').value;
+            const t = document.getElementById('setTeks').value;
+            await db.collection("settings").doc("sambutan").set({ nama: n, teks: t });
+            alert("Sambutan Berhasil Disimpan!");
+        }
+
+        async function saveData(col, data) {
+            if(!Object.values(data)[0]) return alert("Data tidak boleh kosong!");
+            await db.collection(col).add({...data, createdAt: firebase.firestore.FieldValue.serverTimestamp()});
+            alert("Data Berhasil Terbit!"); 
+            location.reload();
+        }
+
+        function loadList(col, elId, field) {
+            db.collection(col).orderBy("createdAt", "desc").onSnapshot(snap => {
+                let html = `<div style="padding:10px; font-size:0.75rem; color:#888; background:#eee;">DATA TERDAFTAR (${col.toUpperCase()})</div>`;
+                snap.forEach(doc => {
+                    html += `<div class="list-item"><span>${doc.data()[field]}</span>
+                    <button class="btn-delete" onclick="deleteData('${col}','${doc.id}')">Hapus</button></div>`;
+                });
+                document.getElementById(elId).innerHTML = html;
+            });
+        }
+
+        async function deleteData(col, id) {
+            if(confirm("Hapus data ini selamanya?")) await db.collection(col).doc(id).delete();
+        }
+
+        function logout() { auth.signOut(); }
+    </script>
+</body>
+</html>
